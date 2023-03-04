@@ -30,7 +30,7 @@ const store= createStore({
     },
     actions:{
         async registerAction(_,userData){
-            const data=await fetch('http://localhost:8080/users/register',{
+            const data=await fetch('https://tasks-api-agws.onrender.com/users/register',{
                 method: 'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -42,7 +42,7 @@ const store= createStore({
             }
         },
         async loginAction({commit}, userData){
-            const data=await fetch('http://localhost:8080/users/login',{
+            const data=await fetch('https://tasks-api-agws.onrender.com/users/login',{
                 method: 'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -56,7 +56,7 @@ const store= createStore({
             await commit('removeToken');
         },
         async fetchTasks({commit}, tokenParam){
-            const request= await fetch('http://localhost:8080/tasks',{
+            const request= await fetch('https://tasks-api-agws.onrender.com/tasks',{
                 method: 'GET',
                 headers:{
                     'Authorization': `Bearer ${tokenParam}`,
@@ -67,7 +67,7 @@ const store= createStore({
             commit('setTasks',response);
         },
         async fetchTask({commit}, pailoadParam){
-            const request=await fetch(`http://localhost:8080/tasks/${pailoadParam.id}`,{
+            const request=await fetch(`https://tasks-api-agws.onrender.com/tasks/${pailoadParam.id}`,{
                 method: 'GET',
                 headers:{
                     'Authorization': `Bearer ${pailoadParam.token}`,
@@ -78,7 +78,7 @@ const store= createStore({
             commit('setTask', response);
         },
         async postTask({commit}, pailoadParam){
-            const request=await fetch('http://localhost:8080/tasks/',{
+            const request=await fetch('https://tasks-api-agws.onrender.com/tasks/',{
                 method: 'POST',
                 headers:{
                     'Authorization': `Bearer ${pailoadParam.token}`,
@@ -90,7 +90,7 @@ const store= createStore({
             commit('addTask', response);
         },
         async putTask({commit}, payloadParam){
-            const request=await fetch(`http://localhost:8080/tasks/${payloadParam.taskObj.id}`,{
+            const request=await fetch(`https://tasks-api-agws.onrender.com/tasks/${payloadParam.taskObj.id}`,{
             method:'PUT',
             headers:{
                 'Authorization': `Bearer ${payloadParam.token}`,
@@ -102,7 +102,7 @@ const store= createStore({
             commit('setTask', response);
         },
         async deleteTask({commit},pailoadParam){
-            const request=await fetch(`http://localhost:8080/tasks/${pailoadParam.id}`,{
+            const request=await fetch(`https://tasks-api-agws.onrender.com/tasks/${pailoadParam.id}`,{
             method: 'DELETE',
             headers:{
                 'Authorization': `Bearer ${pailoadParam.token}`
