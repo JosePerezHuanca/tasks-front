@@ -11,7 +11,7 @@
           <input type="text" id="passw" v-model="password" class="form-control">
         </div>
                 <div class="form-group col-12">
-          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn-primary">Acceder</button>
         </div>
       </form>
     </div>
