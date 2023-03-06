@@ -4,11 +4,11 @@
       <form v-on:submit.prevent="loginUser" class="row">
         <div class="form-group col-lg-6">
           <label for="name">Nombre de usuario</label>
-          <input type="text" id="name" v-model="name" class="form-control">
+          <input type="text" id="name" required v-model="name" class="form-control">
         </div>
         <div class="form-group col-lg-6">
           <label for="passw">Contraseña</label>
-          <input type="text" id="passw" v-model="password" class="form-control">
+          <input type="password" id="passw" required v-model="password" class="form-control">
         </div>
                 <div class="form-group col-12">
           <button type="submit" class="btn btn-primary">Acceder</button>

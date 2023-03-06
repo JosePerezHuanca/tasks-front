@@ -4,15 +4,15 @@
       <form v-on:submit.prevent="createUserMethod" class="row">
         <div class="form-group col-lg-4">
           <label for="name">Nombre de usuario</label>
-          <input type="text" id="name" v-model="name" class="form-control">
+          <input type="text" id="name" required v-model="name" class="form-control">
         </div>
         <div class="form-group col-lg-4">
           <label for="passw">Contraseña</label>
-          <input type="text" id="passw" v-model="password" class="form-control">
+          <input type="password" id="passw" required v-model="password" class="form-control">
         </div>
         <div class="form-group col-lg-4">
           <label for="passw2">Repite la contraseña</label>
-          <input type="text" id="passw2" v-model="password2" class="form-control">
+          <input type="password" id="passw2" required v-model="password2" class="form-control">
         </div>
         <div class="form-group col-12">
           <button type="submit" class="btn btn-primary">Registrarse</button>
