@@ -4,7 +4,7 @@ const store= createStore({
     state:{
         token: localStorage.getItem('token') || null,
         tasks: [],
-        task: {}
+        task: {},
     },
     mutations:{
         setToken(state, tokenParam){
@@ -26,11 +26,14 @@ const store= createStore({
         },
         removeTask(state, idParam){
             state.tasks=state.tasks.filter(t=>t.id!== idParam);
+        },
+        setError(state,errorParam){
+            state.error= errorParam;
         }
     },
     actions:{
         async registerAction(_,userData){
-            const data=await fetch('https://tasks-api-agws.onrender.com/users/register',{
+            const request=await fetch('https://tasks-api-agws.onrender.com/users/login',{
                 method: 'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -42,15 +45,15 @@ const store= createStore({
             }
         },
         async loginAction({commit}, userData){
-            const data=await fetch('https://tasks-api-agws.onrender.com/users/login',{
+            const request=await fetch('https://tasks-api-agws.onrender.com/users/login',{
                 method: 'POST',
                 headers:{
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify(userData)
             })
-            const response= await data.json();
-            commit('setToken', response);
+            const response= await request.json();
+            commit('setToken', response.token);
         },
         async logoutAction({commit}){
             await commit('removeToken');
@@ -64,7 +67,7 @@ const store= createStore({
                 }
             });
             const response=await request.json();
-            commit('setTasks',response);
+            commit('setTasks',response.data);
         },
         async fetchTask({commit}, pailoadParam){
             const request=await fetch(`https://tasks-api-agws.onrender.com/tasks/${pailoadParam.id}`,{
@@ -75,7 +78,7 @@ const store= createStore({
                 }
             })
             const response=await request.json();
-            commit('setTask', response);
+            commit('setTask', response.data);
         },
         async postTask({commit}, pailoadParam){
             const request=await fetch('https://tasks-api-agws.onrender.com/tasks/',{
@@ -86,8 +89,8 @@ const store= createStore({
                 },
                 body: JSON.stringify(pailoadParam.userObj)
             });
-            const response= await request;
-            commit('addTask', response);
+            const response= await request.json();
+            commit('addTask', response.data);
         },
         async putTask({commit}, payloadParam){
             const request=await fetch(`https://tasks-api-agws.onrender.com/tasks/${payloadParam.taskObj.id}`,{
@@ -115,7 +118,7 @@ const store= createStore({
     getters:{
         getToken: state=>state.token,
         getTasks: state=>state.tasks,
-        getTask: state=>state.task
+        getTask: state=>state.task,
     }
 })
 
