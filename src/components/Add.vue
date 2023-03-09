@@ -4,11 +4,11 @@
       <form v-on:submit.prevent="addTaskMethod" class="row">
         <div class="form-group col-lg-6">
           <label for="title">Título</label>
-          <input type="text" id="title" v-model="title" class="form-control">
+          <input type="text" id="title" required v-model="title" class="form-control">
         </div>
         <div class="form-group col-lg-6">
           <label for="description">Descripción</label>
-          <input type="text" id="description" v-model="description" class="form-control">
+          <input type="text" id="description" required v-model="description" class="form-control">
         </div>
         <div class="form-group col-12">
           <button type="submit" class="btn btn-primary">Guardar</button>
@@ -38,8 +38,10 @@
                         description: this.description
                     }
                 }
-                this.$store.dispatch('postTask',paiload);
-                this.$router.push('/tasks');
+                this.$store.dispatch('postTask',paiload)
+                .then(()=>{
+                  this.$router.push('/tasks');
+                })
             }
         }
     }
